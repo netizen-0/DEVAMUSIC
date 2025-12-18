@@ -3,6 +3,7 @@ aiohttp
 apscheduler
 asyncio
 bard
+bing_image_downloader 
 beautifulsoup4
 bs4
 cloudscraper
@@ -14,10 +15,11 @@ Faker
 future==1.0.0
 git+https://github.com/AsmSafone/SafoneAPI
 gitpython
+gpytranslate
 gtts
 hachoir
 heroku3
-httpx
+httpx[http2]==0.27.2
 img2pdf
 instaloader
 lexica-api
@@ -28,12 +30,16 @@ opencv-python
 pillow==9.5.0
 psutil
 pickledb
+pornhub-api==0.3.0
+pycountry
 pycryptodome
 pydub
 pyfiglet
 pykeyboard
-pyrofork
+# pyrogram==2.0.106
+git+https://github.com/KurimuzonAkuma/pyrogram.git
 python-dotenv
+python-telegram-bot==21.1.1
 python-whois
 pyshorteners
 pyttsx3
@@ -53,7 +59,6 @@ tgcrypto
 unidecode
 wget
 yt-dlp
-py_yt_search
 youtube-search
 youtube-search-python
 flask
