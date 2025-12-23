@@ -61,4 +61,5 @@ wget
 yt-dlp
 youtube-search
 youtube-search-python
-flask
+lyricsgenius
+Sflask
