@@ -4,7 +4,7 @@ import string
 import asyncio
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InputMediaPhoto, Message
-from pytgcalls.exceptions import NoActiveGroupCall
+from pytgcalls.exceptions import GroupCallNotFound
 from VIP_INNOCENT.utils.database import get_assistant
 import config
 from VIP_INNOCENT import Apple, Resso, SoundCloud, Spotify, Telegram, YouTube, app
