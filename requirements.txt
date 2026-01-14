@@ -32,12 +32,14 @@ pickledb
 ffmpeg-python
 pydub
 hachoir
-opencv-python
 numpy<2.0.0
 pillow==9.5.0
 img2pdf
 SpeechRecognition
 pyttsx3
+
+# (optional but safe)
+opencv-python-headless
 
 # =========================
 # YOUTUBE / MUSIC
@@ -59,7 +61,6 @@ googlesearch-python
 search_engine_parser
 lexica-api
 deepai
-SafoneAPI
 git+https://github.com/AsmSafone/SafoneAPI
 
 # =========================
