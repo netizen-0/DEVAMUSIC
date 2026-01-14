@@ -2,7 +2,6 @@ import asyncio
 import importlib
 
 from pyrogram import idle
-from pytgcalls.exceptions import PyTgCallsException
 
 import config
 from VIP_INNOCENT import LOGGER, app, userbot
@@ -21,21 +20,20 @@ async def init():
         )
         return
 
+    # Load sudo & banned users
     await sudo()
-
-    # Load banned users
     try:
         for user_id in await get_gbanned():
             BANNED_USERS.add(user_id)
-
         for user_id in await get_banned_users():
             BANNED_USERS.add(user_id)
     except Exception as e:
-        LOGGER(__name__).warning(f"Failed to load banned users: {e}")
+        LOGGER(__name__).warning(f"Banned users load skipped: {e}")
 
-    # Start clients
+    # Start main bot
     await app.start()
 
+    # Load plugins
     for all_module in ALL_MODULES:
         importlib.import_module("VIP_INNOCENT.plugins" + all_module)
 
@@ -43,20 +41,19 @@ async def init():
         "𝐀𝐥𝐥 𝐅𝐞𝐚𝐭𝐮𝐫𝐞𝐬 𝐋𝐨𝐚𝐝𝐞𝐝 𝐁𝐚𝐛𝐲🥳..."
     )
 
+    # Start assistant & VC
     await userbot.start()
     await INNOCENT.start()
 
-    # VC warmup (PyTgCalls v3 SAFE)
+    # VC warmup (SAFE: no pytgcalls exception import)
     try:
         await INNOCENT.stream_call(
             "https://te.legra.ph/file/29f784eb49d230ab62e9e.mp4"
         )
-    except PyTgCallsException as e:
-        LOGGER("VIP_INNOCENT").warning(
-            f"VC warmup skipped (no active voice chat): {e}"
-        )
     except Exception as e:
-        LOGGER("VIP_INNOCENT").warning(f"Unexpected VC error: {e}")
+        LOGGER("VIP_INNOCENT").warning(
+            f"VC warmup skipped (safe ignore): {e}"
+        )
 
     await INNOCENT.decorators()
     await restart_bots()
@@ -71,7 +68,6 @@ async def init():
 
     await app.stop()
     await userbot.stop()
-
     LOGGER("VIP_INNOCENT").info("𝗦𝗧𝗢𝗣 𝗠𝗨𝗦𝗜𝗖 🎻 𝗕𝗢𝗧..")
 
 
