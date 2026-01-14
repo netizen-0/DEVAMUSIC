@@ -3,7 +3,7 @@ import asyncio
 import importlib
 
 from pyrogram import idle
-from pytgcalls.exceptions import NoActiveGroupCall
+from pytgcalls.exceptions import GroupCallNotFound
 
 import config
 from VIP_INNOCENT import LOGGER, app, userbot
