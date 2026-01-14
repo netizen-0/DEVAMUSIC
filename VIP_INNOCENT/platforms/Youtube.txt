@@ -12,8 +12,8 @@ from VIP_INNOCENT.utils.formatters import time_to_seconds
 
 
 # API Configuration
-API_BASE_URL = "https://youtubify.me"
-API_KEY = "773f80726ade410590c486d23db96a62"
+API_BASE_URL = "https://console.nexgenbots.xyz"
+API_KEY = "30DxNexGenBotsbb8686"
 
 # Streaming configuration
 ENABLE_STREAMING = True  # Enable streaming URLs for VC (no file size limit)
