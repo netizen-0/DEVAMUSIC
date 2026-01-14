@@ -1,63 +1,96 @@
+# =========================
+# CORE TELEGRAM STACK
+# =========================
+pyrogram==2.0.106
+tgcrypto==1.2.5
+pytgcalls==3.0.0.dev24
+telethon==1.34.0
+
+# =========================
+# ASYNC / CORE UTILS
+# =========================
 aiofiles
 aiohttp
 apscheduler
-beautifulsoup4
-bing-image-downloader
-cloudscraper
-deepai
-dnspython
-emojis
-ffmpeg-python
-Faker
 future==1.0.0
-git+https://github.com/AsmSafone/SafoneAPI
-gitpython
-gpytranslate
-gtts
-hachoir
-heroku3
-httpx[http2]==0.27.2
-img2pdf
-instaloader
-lexica-api
-motor
-numpy<2.0.0
-openai==2.15.0
-opencv-python
-pillow==9.5.0
-psutil
-pickledb
-pornhub-api==0.3.0
-pycountry
-pycryptodome
-pydub
-pyfiglet
-pykeyboard
-git+https://github.com/KurimuzonAkuma/pyrogram.git
 python-dotenv
-python-telegram-bot==21.1.1
-python-whois
-pyshorteners
-pyttsx3
 pytz
-pytube
-py-tgcalls==0.9.7
-pyyaml==6.0.1
-qrcode
+psutil
 requests
-SafoneAPI
-search_engine_parser
-speedtest-cli
+httpx[http2]==0.27.2
+
+# =========================
+# DATABASE
+# =========================
+motor
+dnspython
+pickledb
+
+# =========================
+# MEDIA / AUDIO / VIDEO
+# =========================
+ffmpeg-python
+pydub
+hachoir
+opencv-python
+numpy<2.0.0
+pillow==9.5.0
+img2pdf
 SpeechRecognition
-spotipy
-telegraph
-telethon
-tgcrypto
-unidecode
-wget
+pyttsx3
+
+# =========================
+# YOUTUBE / MUSIC
+# =========================
 yt-dlp
 youtube-search
 youtube-search-python
+pytube
+spotipy
 lyricsgenius
-Flask
+
+# =========================
+# EXTERNAL APIS / SCRAPING
+# =========================
+beautifulsoup4
+cloudscraper
+bing-image-downloader
 googlesearch-python
+search_engine_parser
+lexica-api
+deepai
+SafoneAPI
+git+https://github.com/AsmSafone/SafoneAPI
+
+# =========================
+# TELEGRAM TOOLS
+# =========================
+telegraph
+pyshorteners
+pycountry
+emojis
+unidecode
+qrcode
+
+# =========================
+# AI / OPENAI
+# =========================
+openai==2.15.0
+
+# =========================
+# OTHER UTILS
+# =========================
+Faker
+gitpython
+heroku3
+instaloader
+pornhub-api==0.3.0
+pyfiglet
+pyyaml==6.0.1
+wget
+gtts
+
+# =========================
+# WEB / SERVER
+# =========================
+Flask
