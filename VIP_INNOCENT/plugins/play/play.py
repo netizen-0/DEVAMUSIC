@@ -3,7 +3,7 @@ import string
 
 from pyrogram import filters
 from pyrogram.types import InlineKeyboardMarkup, Message
-from pytgcalls.exceptions import NoActiveGroupCall
+from pytgcalls.exceptions import GroupCallNotFound
 
 import config
 from VIP_INNOCENT import Apple, Resso, SoundCloud, Spotify, Telegram, YouTube, app, LOGGER
