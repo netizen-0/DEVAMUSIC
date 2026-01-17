@@ -6,7 +6,7 @@ from typing import Union
 from pyrogram import Client
 from pyrogram.types import InlineKeyboardMarkup
 from pytgcalls import PyTgCalls
-from pytgcalls.exceptions import PyTgCallsError
+from pytgcalls.exceptions import  PyTgCallsException
 from pytgcalls.types import Update
 from pytgcalls.types.input_stream import AudioPiped, AudioVideoPiped
 from pytgcalls.types.input_stream.quality import HighQualityAudio, MediumQualityVideo
@@ -121,7 +121,7 @@ class Call:
 
         try:
             await assistant.join_group_call(chat_id, stream)
-        except PyTgCallsError:
+        except PyTgCallsException:
             # py-tgcalls 2.x me saare voice errors yahin aate hain
             raise AssistantErr(_["call_10"])
 
