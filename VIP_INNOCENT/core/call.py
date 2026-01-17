@@ -6,11 +6,7 @@ from typing import Union
 from pyrogram import Client
 from pyrogram.types import InlineKeyboardMarkup
 from pytgcalls import PyTgCalls
-from pytgcalls.exceptions import (
-    AlreadyJoinedError,
-    NoActiveGroupCall,
-    TelegramServerError,
-)
+from pytgcalls.exceptions import PyTgCallsError
 from pytgcalls.types import Update
 from pytgcalls.types.input_stream import AudioPiped, AudioVideoPiped
 from pytgcalls.types.input_stream.quality import HighQualityAudio, MediumQualityVideo
@@ -125,11 +121,8 @@ class Call:
 
         try:
             await assistant.join_group_call(chat_id, stream)
-        except NoActiveGroupCall:
-            raise AssistantErr(_["call_8"])
-        except AlreadyJoinedError:
-            raise AssistantErr(_["call_9"])
-        except TelegramServerError:
+        except PyTgCallsError:
+            # py-tgcalls 2.x me saare voice errors yahin aate hain
             raise AssistantErr(_["call_10"])
 
         await add_active_chat(chat_id)
