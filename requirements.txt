@@ -61,3 +61,4 @@ youtube-search-python
 lyricsgenius
 Flask
 googlesearch-python
+pytgcalls==3.0.0.dev24
