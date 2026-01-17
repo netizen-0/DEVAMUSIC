@@ -6,11 +6,19 @@ from typing import Union
 from pyrogram import Client
 from pyrogram.types import InlineKeyboardMarkup
 from pytgcalls import PyTgCalls
-from pytgcalls.exceptions import  PyTgCallsException
 from pytgcalls.types import Update
 from pytgcalls.types.input_stream import AudioPiped, AudioVideoPiped
 from pytgcalls.types.input_stream.quality import HighQualityAudio, MediumQualityVideo
 from pytgcalls.types.stream import StreamAudioEnded
+
+# ✅ SAFE pytgcalls exception import (works for all versions)
+try:
+    from pytgcalls.exceptions import PyTgCallsException as PyTgCallsError
+except Exception:
+    try:
+        from pytgcalls.exceptions import PyTgCallsError
+    except Exception:
+        PyTgCallsError = Exception
 
 import config
 from VIP_INNOCENT import LOGGER, YouTube, app
@@ -121,8 +129,7 @@ class Call:
 
         try:
             await assistant.join_group_call(chat_id, stream)
-        except PyTgCallsException:
-            # py-tgcalls 2.x me saare voice errors yahin aate hain
+        except PyTgCallsError:
             raise AssistantErr(_["call_10"])
 
         await add_active_chat(chat_id)
