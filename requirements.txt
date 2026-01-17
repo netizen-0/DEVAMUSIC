@@ -49,6 +49,7 @@ youtube-search-python
 pytube
 spotipy
 lyricsgenius
+pykeyboard
 
 # =========================
 # EXTERNAL APIS / SCRAPING
