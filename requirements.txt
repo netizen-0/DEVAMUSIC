@@ -18,7 +18,7 @@ python-dotenv
 pytz
 psutil
 requests
-httpx[http2]==0.27.2
+httpx[http2]==0.25.2
 
 # =========================
 # DATABASE
@@ -38,8 +38,6 @@ pillow==9.5.0
 img2pdf
 SpeechRecognition
 pyttsx3
-
-# (optional but safe)
 opencv-python-headless
 
 # =========================
