@@ -61,3 +61,4 @@ youtube-search-python
 lyricsgenius
 Flask
 googlesearch-python
+git+https://github.com/pytgcalls/pytgcalls
