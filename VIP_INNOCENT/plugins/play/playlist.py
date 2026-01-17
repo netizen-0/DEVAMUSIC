@@ -20,7 +20,7 @@ from VIP_INNOCENT.utils.inline.playlist import (
 from VIP_INNOCENT.utils.pastebin import INNOCENTBin
 from VIP_INNOCENT.utils.stream.stream import stream
 
-import time  # ✅ keep only this
+import time  # keep only this
 
 playlistdb = mongodb.playlist
 
@@ -78,7 +78,6 @@ DELETE_ALL_PLAYLIST_COMMAND = "delallplaylist"
 
 
 def _spam_check(message: Message) -> bool:
-    """Returns True if spam detected and handled."""
     user_id = message.from_user.id
     current_time = time.time()
     last_message_time = user_last_message_time.get(user_id, 0)
@@ -235,7 +234,7 @@ async def play_playlist_cb(client, CallbackQuery, _):
 )
 @languageCB
 async def play_playlist_command(client, message: Message, _):
-    mode = message.command[0][0]  # 'p' or 'v'
+    mode = message.command[0][0]
     user_id = message.from_user.id
 
     _playlist = await get_playlist_names(user_id)
@@ -291,7 +290,7 @@ async def add_playlist_cmd(client, message: Message, _):
 
     query = " ".join(message.command[1:]).strip()
 
-    # ✅ YouTube Playlist link
+    # YouTube Playlist link
     if "youtube.com/playlist" in query:
         adding = await message.reply_text("**🎧 ᴀᴅᴅɪɴɢ sᴏɴɢs ɪɴ ᴘʟᴀʏʟɪsᴛ ᴘʟᴇᴀsᴇ ᴡᴀɪᴛ..**")
         try:
@@ -312,8 +311,7 @@ async def add_playlist_cmd(client, message: Message, _):
 
         for video_url in video_urls:
             video_id = video_url.split("v=")[-1].split("&")[0]
-            _check = await get_playlist(user_id, video_id)
-            if _check:
+            if await get_playlist(user_id, video_id):
                 continue
 
             try:
@@ -339,7 +337,7 @@ async def add_playlist_cmd(client, message: Message, _):
             reply_markup=keyboardes,
         )
 
-    # ❌ YouTube channel (@username) block was broken (undefined YouTube_videos etc.)
+    # YouTube channel (@username) block was broken in your code (undefined functions)
     if "youtube.com/@" in query:
         return await message.reply_text(
             "**➻ YouTube channel (@username) add feature abhi disabled hai (code me function missing tha).**\n\n"
@@ -349,7 +347,7 @@ async def add_playlist_cmd(client, message: Message, _):
             "▷ `/addplaylist youtube playlist link`"
         )
 
-    # ✅ youtu.be single video link
+    # youtu.be single video link
     if "youtu.be/" in query:
         add = await message.reply_text("**🎧 ᴀᴅᴅɪɴɢ sᴏɴɢ ᴘʟᴇᴀsᴇ ᴡᴀɪᴛ..**")
         try:
@@ -358,9 +356,8 @@ async def add_playlist_cmd(client, message: Message, _):
             videoid = query.split("youtu.be/")[-1].split("?")[0].split("&")[0]
             user_id = message.from_user.id
 
-            _check = await get_playlist(user_id, videoid)
             thumbnail = f"https://img.youtube.com/vi/{videoid}/maxresdefault.jpg"
-            if _check:
+            if await get_playlist(user_id, videoid):
                 await add.delete()
                 return await message.reply_photo(thumbnail, caption=_["playlist_8"])
 
@@ -389,18 +386,16 @@ async def add_playlist_cmd(client, message: Message, _):
             await add.delete()
             return await message.reply_text(str(e))
 
-    # ✅ song name search
+    # song name search
     from VIP_INNOCENT import YouTube
 
     try:
         results = YoutubeSearch(query, max_results=1).to_dict()
-        link = f"https://youtube.com{results[0]['url_suffix']}"
         thumbnail = results[0]["thumbnails"][0]
         videoid = results[0]["id"]
 
         user_id = message.from_user.id
-        _check = await get_playlist(user_id, videoid)
-        if _check:
+        if await get_playlist(user_id, videoid):
             return await message.reply_photo(thumbnail, caption=_["playlist_8"])
 
         if len(await get_playlist_names(user_id)) >= SERVER_PLAYLIST_LIMIT:
@@ -420,7 +415,7 @@ async def add_playlist_cmd(client, message: Message, _):
         await m.delete()
         return await message.reply_photo(
             thumbnail,
-            caption=f"**➻ ᴀᴅᴅᴇᴅ ✅**\n\n**➥ /playlist | /delplaylist**\n\n**🔗 {link}**",
+            caption="**➻ ᴀᴅᴅᴇᴅ ✅**\n\n**➥ /playlist | /delplaylist**",
             reply_markup=keyboard,
         )
     except Exception:
@@ -475,8 +470,7 @@ async def recover_playlist_cb(client, CallbackQuery, _):
     videoid = callback_data.split(None, 1)[1]
     user_id = CallbackQuery.from_user.id
 
-    _check = await get_playlist(user_id, videoid)
-    if _check:
+    if await get_playlist(user_id, videoid):
         try:
             return await CallbackQuery.answer(_["playlist_8"], show_alert=True)
         except:
