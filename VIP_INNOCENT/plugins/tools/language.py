@@ -1,6 +1,5 @@
-from pykeyboard import InlineKeyboard
 from pyrogram import filters
-from pyrogram.types import InlineKeyboardButton, Message
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 
 from VIP_INNOCENT import app
 from VIP_INNOCENT.utils.database import get_lang, set_lang
@@ -10,26 +9,34 @@ from strings import get_string, languages_present
 
 
 def lanuages_keyboard(_):
-    keyboard = InlineKeyboard(row_width=2)
-    keyboard.add(
-        *[
-            (
-                InlineKeyboardButton(
-                    text=languages_present[i],
-                    callback_data=f"languages:{i}",
-                )
+    buttons = []
+
+    # 2 buttons per row
+    row = []
+    for i in languages_present:
+        row.append(
+            InlineKeyboardButton(
+                text=languages_present[i],
+                callback_data=f"languages:{i}",
             )
-            for i in languages_present
+        )
+        if len(row) == 2:
+            buttons.append(row)
+            row = []
+
+    # add leftover button if odd count
+    if row:
+        buttons.append(row)
+
+    # bottom row
+    buttons.append(
+        [
+            InlineKeyboardButton(text=_["BACK_BUTTON"], callback_data="settingsback_helper"),
+            InlineKeyboardButton(text=_["CLOSE_BUTTON"], callback_data="close"),
         ]
     )
-    keyboard.row(
-        InlineKeyboardButton(
-            text=_["BACK_BUTTON"],
-            callback_data=f"settingsback_helper",
-        ),
-        InlineKeyboardButton(text=_["CLOSE_BUTTON"], callback_data=f"close"),
-    )
-    return keyboard
+
+    return InlineKeyboardMarkup(buttons)
 
 
 @app.on_message(filters.command(["lang", "setlang", "language"]) & ~BANNED_USERS)
@@ -58,17 +65,17 @@ async def lanuagecb(client, CallbackQuery, _):
 async def language_markup(client, CallbackQuery, _):
     langauge = (CallbackQuery.data).split(":")[1]
     old = await get_lang(CallbackQuery.message.chat.id)
+
     if str(old) == str(langauge):
         return await CallbackQuery.answer(_["lang_4"], show_alert=True)
+
     try:
-        _ = get_string(langauge)
-        await CallbackQuery.answer(_["lang_2"], show_alert=True)
+        _new = get_string(langauge)
+        await CallbackQuery.answer(_new["lang_2"], show_alert=True)
     except:
-        _ = get_string(old)
-        return await CallbackQuery.answer(
-            _["lang_3"],
-            show_alert=True,
-        )
+        _old = get_string(old)
+        return await CallbackQuery.answer(_old["lang_3"], show_alert=True)
+
     await set_lang(CallbackQuery.message.chat.id, langauge)
-    keyboard = lanuages_keyboard(_)
+    keyboard = lanuages_keyboard(_new)
     return await CallbackQuery.edit_message_reply_markup(reply_markup=keyboard)
