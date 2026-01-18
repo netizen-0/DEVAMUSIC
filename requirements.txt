@@ -41,7 +41,7 @@ pyshorteners
 pyttsx3
 pytz
 pytube
-py-tgcalls==2.2.8
+pytgcalls==2.2.8
 pyyaml==6.0.1
 qrcode
 requests
@@ -61,4 +61,3 @@ youtube-search-python
 lyricsgenius
 Flask
 googlesearch-python
-pytgcalls==3.0.0.dev24
