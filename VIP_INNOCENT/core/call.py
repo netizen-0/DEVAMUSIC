@@ -5,7 +5,16 @@ from typing import Union
 
 from pyrogram import Client
 from pyrogram.types import InlineKeyboardMarkup
-from pytgcalls import PyTgCalls
+
+# ✅ Import based on pytgcalls version
+try:
+    from pytgcalls import PyTgCalls as TgCalls
+except ImportError:
+    try:
+        from pytgcalls import Client as TgCalls
+    except ImportError:
+        from pytgcalls.client import Client as TgCalls
+
 from pytgcalls.types import Update, AudioPiped, AudioVideoPiped, StreamAudioEnded
 from pytgcalls.types.input_stream.quality import HighQualityAudio, MediumQualityVideo
 
@@ -62,7 +71,7 @@ class Call:
             api_hash=config.API_HASH,
             session_string=str(config.STRING1),
         )
-        self.one = PyTgCalls(self.userbot1, cache_duration=150)
+        self.one = TgCalls(self.userbot1, cache_duration=150)
 
     async def pause_stream(self, chat_id: int):
         assistant = await group_assistant(self, chat_id)
