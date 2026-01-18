@@ -6,14 +6,8 @@ from typing import Union
 from pyrogram import Client
 from pyrogram.types import InlineKeyboardMarkup
 
-# ✅ Import based on pytgcalls version
-try:
-    from pytgcalls import PyTgCalls as TgCalls
-except ImportError:
-    try:
-        from pytgcalls import Client as TgCalls
-    except ImportError:
-        from pytgcalls.client import Client as TgCalls
+# ✅ Import for pytgcalls v1.0.0 (compatible with Python 3.11)
+from pytgcalls import PyTgCalls as TgCalls
 
 from pytgcalls.types import Update, AudioPiped, AudioVideoPiped, StreamAudioEnded
 from pytgcalls.types.input_stream.quality import HighQualityAudio, MediumQualityVideo
